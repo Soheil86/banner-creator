@@ -23,7 +23,6 @@ const authUser = asyncHandler(async (req, res) => {
     throw new Error('Invalid email or password')
   }
 })
-
 // @desc    Register a new user
 // @route   POST /api/users
 // @access  Public
@@ -56,7 +55,6 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('Invalid user data')
   }
 })
-
 // @desc    Get user profile
 // @route   GET /api/users/profile
 // @access  Private
