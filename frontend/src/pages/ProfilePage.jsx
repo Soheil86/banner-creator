@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
+import Message from '../components/common/Message'
+import Loader from '../components/common/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 
 const ProfilePage = () => {
@@ -36,7 +36,7 @@ const ProfilePage = () => {
         setEmail(user.email)
       }
     }
-  }, [dispatch, userInfo, user])
+  }, [dispatch, userInfo, user, navigate])
 
   const submitHandler = (e) => {
     e.preventDefault()

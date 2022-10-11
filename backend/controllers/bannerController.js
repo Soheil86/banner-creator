@@ -23,4 +23,48 @@ const getBannerById = asyncHandler(async (req, res) => {
   }
 })
 
-export {getBanners,getBannerById}
+// @desc    Delete a banner
+// @route   DELETE /api/banners/:id
+// @access  Private/Admin
+const deleteBanner = asyncHandler(async (req, res) => {
+  const banner = await Banner.findById(req.params.id)
+
+  if (banner) {
+    await banner.remove()
+    res.json(banner)
+  } else {
+    res.status(404)
+    throw new Error('Banner not found')
+  }
+})
+
+const createBanner = asyncHandler(async (req, res) => {
+  const { title, image } = req.body
+  const banner = new Banner({
+    title: title,
+    user: req.user._id,
+    image: image,
+  })
+
+  const createdBanner = await banner.save()
+  res.status(201).json(createdBanner)
+})
+
+const updateBanner = asyncHandler(async (req, res) => {
+  const { title, image } = req.body
+
+  const banner = await Banner.findById(req.params.id)
+
+  if (banner) {
+    banner.title = title
+    banner.image = image
+
+    const updatedBanner = await banner.save()
+    res.json(updatedBanner)
+  } else {
+    res.status(404)
+    throw new Error('Banner not found')
+  }
+})
+
+export { getBanners, getBannerById, deleteBanner, createBanner, updateBanner }
